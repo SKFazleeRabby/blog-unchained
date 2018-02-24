@@ -1,0 +1,96 @@
+{% extends 'layout/dashboard/base.html' %}
+{% load static %}
+
+{% block main_content %}
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="col-md-9">
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-note font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">{{ form_title }}</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-group">
+                        <label for="{{ form.title.auto_id }}"></label>
+                        <input type="text" id="{{ form.title.auto_id }}" class="form-control input-lg" placeholder="Post Title" name="{{ form.title.name }}" value="{{ form.title.value | default_if_none:'' }}">
+                        <span class="small text-danger">{{ form.title.errors }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.body.auto_id }}"></label>
+                        <textarea name="{{ form.body.name }}" id="{{ form.body.auto_id }}" cols="30" rows="10" class="form-control input-lg" placeholder="Post Details">{{ form.body.value | default_if_none:''}}</textarea>
+                        <span class="small text-danger">{{ form.body.errors }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="portlet light ">
+
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-settings font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">Options</span>
+                    </div>
+                </div>
+
+                <div class="portlet-body form">
+                    <div class="form-group">
+                        <label for="{{ form.category.auto_id }}">Category</label>
+                        <select name="{{ form.category.name }}" id="{{ form.category.auto_id }}" class="form-control">
+                             {% for option in form.category.field.choices %}
+                                 <option value={{ option.0 }} {% if form.category.value == option.0 %} selected {% endif %}>{{ option.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    <span class="small text-danger">{{ form.category.errors }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.images.auto_id }}"></label>
+                        <img src="{{ MEDIA_URL }}{{ form.images.value }}" class="img-responsive" alt="">
+                        <input type="file" id="{{ form.images.auto_id }}" name="{{ form.images.name }}" class="form-control" value="{{ form.images.value }}">
+                        <span class="small text-danger">{{ form.images.errors }}</span>
+                    </div>
+
+                <div class="mt-checkbox-list" style="margin-bottom: 20px">
+                    <div class="col-md-6" style="padding: 0px; font-size: 16px">Featured</div>
+                    <div class="col-md-6" style="padding: 0px;">
+                        <label class="mt-checkbox pull-right">
+                            <input type="checkbox" name="{{ form.featured.name }}" id="{{ form.featured.auto_id }}" {{ form.featured.value|yesno:'checked,' }}>
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mt-checkbox-list" style="margin-bottom: 40px">
+                    <div class="col-md-6" style="padding: 0px; font-size: 16px">Draft</div>
+                    <div class="col-md-6" style="padding: 0px;">
+                        <label class="mt-checkbox pull-right">
+                            <input type="checkbox" name="{{ form.draft.name }}" id="{{ form.draft.auto_id }}" {{ form.draft.value|yesno:'checked,' }}>
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="form-group">
+                    <label for="">Published Date</label>
+                    <input type="date" class="form-control form-control-inline" size="16" value="{{ form.published.value|date:"Y-m-d" }}" name="{{ form.published.name }}" id="{{ form.published.auto_id }}">
+                </div>
+                    <div style="margin: 40px auto"></div>
+                    <div class="form-group text-right">
+                        <button class="btn btn-primary">{{ button_name }}</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+

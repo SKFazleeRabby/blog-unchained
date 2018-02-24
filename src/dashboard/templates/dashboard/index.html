@@ -1,0 +1,5 @@
+{% extends 'layout/dashboard/base.html' %}
+
+{% block main_content %}
+    <h2 class="text-center">Hello {{ request.user.userdetails.full_name }}</h2>
+{% endblock %}

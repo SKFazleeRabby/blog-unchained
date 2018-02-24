@@ -1,0 +1,49 @@
+{% extends 'layout/blog/base.html' %}
+
+{% block site_title %}Register - Blog Unchained{% endblock %}
+
+{% block main_content %}
+
+    <div class="container">
+        <div class="col-md-6 offset-md-3 card">
+            <div class="card-body">
+                <h3 class="text-center">REGISTER</h3>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-inline">
+                        <div class="col-md-6" style="padding: 0px; margin-bottom: 40px;">
+                            <label for="{{ form.first_name.auto_id }}" style="align-items: left; justify-content: left">First Name</label>
+                            <input type="text" id="{{ form.first_name.auto_id }}" class="form-control" name="{{ form.first_name.name }}" value="{{ form.first_name.value | default_if_none:'' }}">
+                            <span class="small text-danger" style="display: block">{{ form.first_name.errors }}</span>
+                        </div>
+                        <div class="col-md-6" style="padding: 0px; margin-bottom: 40px;">
+                            <label for="{{ form.last_name.auto_id }}" style="align-items: left; justify-content: left">Last Name</label>
+                            <input type="text" id="{{ form.last_name.auto_id }}" class="form-control" name="{{ form.last_name.name }}" value="{{ form.last_name.value | default_if_none:'' }}">
+                            <span class="small text-danger" style="display: block">{{ form.last_name.errors }}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.auto_id }}">Email</label>
+                        <input type="email" id="{{ form.email.auto_id }}" class="form-control" name="{{ form.email.name }}" value="{{ form.email.value | default_if_none:'' }}">
+                        <span class="small text-danger">{{ form.email.errors }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.password.auto_id }}">Password</label>
+                        <input type="password" id="{{ form.password.auto_id }}" class="form-control" name="{{ form.password.name }}">
+                        <span class="small text-danger">{{ form.password.errors }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.confirm_password.auto_id }}">Confirm Password</label>
+                        <input type="password" id="{{ form.confirm_password.auto_id }}" class="form-control" name="{{ form.confirm_password.name }}">
+                        <span class="small text-danger">{{ form.confirm_password.errors }}</span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

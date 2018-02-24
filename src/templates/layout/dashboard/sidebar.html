@@ -1,0 +1,99 @@
+<div class="page-sidebar-wrapper">
+                <div class="page-sidebar navbar-collapse collapse">
+                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+
+                        <li class="nav-item start active open">
+                            <a href="{% url 'dashboard:index' %}" class="nav-link nav-toggle">
+                                <i class="icon-home"></i>
+                                <span class="title">Dashboard</span>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-folder-alt"></i>
+                                <span class="title">Post</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item start ">
+                                    <a href="{% url 'dashboard:post:create' %}" class="nav-link ">
+                                        <i class="icon-note"></i>
+                                        <span class="title">Create Post</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a href="{% url 'dashboard:post:index' %}" class="nav-link ">
+                                        <i class="icon-book-open"></i>
+                                        <span class="title">All Posts</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        {% if request.user.is_admin %}
+                            <li class="nav-item">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-list"></i>
+                                <span class="title">Category</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item start ">
+                                    <a href="{% url 'dashboard:category:create' %}" class="nav-link ">
+                                        <i class="icon-note"></i>
+                                        <span class="title">Create Category</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a href="{% url 'dashboard:category:index' %}" class="nav-link ">
+                                        <i class="icon-book-open"></i>
+                                        <span class="title">All Categories</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-user"></i>
+                                <span class="title">Profile</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item start ">
+                                    <a href="{% url 'dashboard:profile' %}" class="nav-link ">
+                                        <i class="icon-note"></i>
+                                        <span class="title">View Profile</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a href="{% url 'dashboard:profile-edit' %}" class="nav-link ">
+                                        <i class="icon-key"></i>
+                                        <span class="title">Change Password</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'dashboard:comments' %}" class="nav-link nav-toggle">
+                                <i class="icon-bubbles"></i>
+                                <span class="title">Comment</span>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'account:logout' %}" class="nav-link nav-toggle">
+                                <i class="icon-logout"></i>
+                                <span class="title">Logout</span>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>

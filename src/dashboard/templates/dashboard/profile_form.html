@@ -1,0 +1,35 @@
+{% extends 'layout/dashboard/base.html' %}
+{% load debug_tags %}
+
+{% block main_content %}
+    <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-note font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">Edit Profile</span>
+                    </div>
+                    <form method="POST" enctype="multipart/form-data">
+                    <div class="pull-right">
+                        <span class="pull-right"><button type="submit" class="btn btn-primary" >Update</button></span>
+                    </div>
+                </div>
+                <div class="portlet-body" style="overflow: auto">
+                        {% csrf_token %}
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" name="{{ form.first_name.name }}" class="form-control input-lg" placeholder="First Name" value="{{ form.first_name.value|default_if_none:'' }}">
+                            </div>
+                             <div class="form-group">
+                                <input type="text" name="{{ form.last_name.name }}" class="form-control input-lg" placeholder="Last Name" value="{{ form.last_name.value|default_if_none:'' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                 <img src="{{ request.user.userdetails.profile_image.url }}" class="img-responsive" alt="">
+                                <input type="file" name="{{ form.profile_image.name }}" class="form-control">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'layout/dashboard/base.html' %}
+{% load debug_tags %}
+{% load humanize %}
+
+{% block main_content %}
+    <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-note font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">All Comments</span>
+                    </div>
+                </div>
+                <div class="portlet-body" style="overflow: auto">
+                    {% if not comments %}
+                        <h2 class="text-center">You Don't Have Any Posts to Show</h2>
+                        <h3 class="text-center text-primary"><a href="{% url 'dashboard:post:create' %}">Create Now</a></h3>
+                    {% else %}
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Post Title </th>
+                                <th> Comment </th>
+                                <th> Time </th>
+                                <th> User </th>
+                                <th> Actions </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for comment in comments %}
+                            <tr>
+                                <td> {{ forloop.counter }} </td>
+                                <td><a href="{% url 'blog:blog-detail' comment.post.id %}" target="_blank"> {{ comment.post.title }} </a></td>
+                                <td> {{ comment.content|truncatewords:10 }} </td>
+                                <td> {{ comment.created|naturaltime }} </td>
+                                <td> {{ comment.user.userdetails.full_name }} </td>
+                                <td>
+                                    <a href="{% url 'blog:blog-detail' comment.post.id %}" target="_blank" class="label label-sm label-primary"> View </a>
+                                    <a href="{% url 'dashboard:comment-delete' comment.post.id %}" class="label label-sm label-danger"> Delete </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+                {% if is_paginated %}
+                  {% include 'modules/pagination.html' %}
+                {% endif %}
+                </div>
+            </div>
+{% endblock %}

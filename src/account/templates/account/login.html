@@ -1,0 +1,35 @@
+{% extends 'layout/blog/base.html' %}
+
+{% block site_title %}Login - Blog Unchained{% endblock %}
+
+{% block main_content %}
+
+    <div class="container">
+        <div class="col-md-6 offset-md-3 card">
+            <div class="card-body">
+                <h3 class="text-center">LOGIN</h3>
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                {% endif %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.email.auto_id }}">Email</label>
+                        <input type="email" id="{{ form.email.auto_id }}" class="form-control" name="{{ form.email.name }}" value="{{ form.email.value | default_if_none:'' }}">
+                        <span class="small text-danger">{{ form.email.errors }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.category.auto_id }}">Password</label>
+                        <input type="password" id="{{ form.category.auto_id }}" class="form-control" name="{{ form.password.name }}">
+                        <span class="small text-danger">{{ form.category.errors }}</span>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
